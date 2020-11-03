@@ -8,5 +8,5 @@ CSE_ID = config('CSE_ID')
 DORK = 'inurl:index.php?id=2 site:fr'
 
 
-print API_KEY
-print CSE_ID
+print(API_KEY)
+print(CSE_ID)
