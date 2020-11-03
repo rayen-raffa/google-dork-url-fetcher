@@ -1,0 +1,1 @@
+DORK = 'inurl:index.php?id=2 site:fr'
