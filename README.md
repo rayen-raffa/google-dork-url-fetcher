@@ -11,6 +11,7 @@ In order to use this tool, please run the following commands in the terminal to 
 
 ```shell
 sudo pip2 install python-decouple
+sudo pip2 install requests
 ```
 
 ## Running the tool
