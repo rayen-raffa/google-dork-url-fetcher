@@ -16,28 +16,31 @@ ENCODED_DORK = urllib.quote_plus(DORK)
 # for each resp page
 for page in range(10):
     start = page * 10 + 1
-    payload = {
-        'cx': CSE_ID,
-        'key': API_KEY,
-        'q': ENCODED_DORK,
-        'start': start
-    }
+
     # get json data from api
-    print("fetching page {}".format(page+1))
+    API_ENDPOINT = "https://www.googleapis.com/customsearch/v1?key={0}&cx={1}&q={2}&start={3}".format(API_KEY,CSE_ID,ENCODED_DORK,start)
+    print("fetching page {} - {}".format(page+1,API_ENDPOINT))
     
     try:
-        resp = requests.get(API_ENDPOINT, params=payload)
+        resp = requests.get(API_ENDPOINT)
     except Exception as e:
         print("ERROR fetching from page {} ! Skipping ...".format(page+1))
     
-    
-#   for each url
-#       append te res file
+    if(resp):
+        json_data = resp.json()
+        try:
+            items = json_data["items"]
+        except KeyError:
+            print("ALERT : No response found in page {} ! Skipping ...".format(page+1))
+            items = []
+        # for each url
+        for item in items:
+            print(item["link"])
 
-# API_ENDPOINT = "https://www.googleapis.com/customsearch/v1?key={0}&cx={1}&q={2}".format(API_KEY,CSE_ID,ENCODED_DORK)
+#       append te res file
 
 
 print(API_ENDPOINT)
 print(API_KEY)
 print(CSE_ID)
-print(resp.json())
+# print(resp.json())
